@@ -25,6 +25,10 @@ namespace API.Controllers
         {
            var hadiths = await _hadithsRepository.GetHadithsAsync(userParams);
 
+           if (hadiths.Count<=0) {
+                return BadRequest("Data Not Found");
+            }
+
             Response.AddPaginationHeader(hadiths.CurrentPage, hadiths.PageSize, hadiths.TotalCount, hadiths.TotalPages);
 
             return Ok(hadiths);

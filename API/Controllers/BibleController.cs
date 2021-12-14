@@ -21,11 +21,11 @@ namespace API.Controllers
         [HttpPost("AddNew")]
         public async Task<ActionResult<TBible>> AddNew(TBibleDto tBibleDto)
         {
-            var TBible1 = new TBible
+            var tBibles = new TBible
             {
                 BookTitle = tBibleDto.BookTitle,
                 REf = tBibleDto.REf,
-                TextData = tBibleDto.REf,
+                TextData = tBibleDto.TextData,
                 Verse_Length = tBibleDto.Verse_Length,
                 Gita = tBibleDto.Gita,
                 Quran = tBibleDto.Quran,
@@ -35,10 +35,10 @@ namespace API.Controllers
                 BTags = tBibleDto.BTags
             };
 
-            _context.tBible.Add(TBible1);
+            _context.tBible.Add(tBibles);
             await _context.SaveChangesAsync();
 
-            return TBible1;
+            return tBibles;
         }
     }
 }

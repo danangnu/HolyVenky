@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -23,6 +21,10 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<ytquran>>> Getytqurans([FromQuery]UserParams userParams)
         {
             var qurans = await _iytquranRepository.GetQuranAsync(userParams);
+
+            if (qurans.Count<=0) {
+                return BadRequest("Data Not Found");
+            }
 
             Response.AddPaginationHeader(qurans.CurrentPage, qurans.PageSize, qurans.TotalCount, qurans.TotalPages);
 

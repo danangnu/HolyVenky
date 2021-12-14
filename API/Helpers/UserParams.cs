@@ -17,5 +17,9 @@ namespace API.Helpers
         public string Comment { get; set; }
         public string Chapter { get; set; }
         public string IGS { get; set; }
+        public string BookTitle { get; set; }
+        public string TextData { get; set; }
+        public string Field1 { get; set; }
+        public string Field2 { get; set; }
     }
 }

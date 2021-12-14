@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Helpers;
@@ -17,8 +18,29 @@ namespace API.Data
 
         public async Task<PagedList<Ztgita_Full>> GetBhaktivedantaAsync(UserParams userParams)
         {
-            var query = _context.Ztgita_Full.AsNoTracking();
-            return await PagedList<Ztgita_Full>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+            var query = _context.Ztgita_Full.AsQueryable();
+
+            if (!string.IsNullOrEmpty(userParams.Comment))
+            {
+                if (userParams.Comment.Equals("all")) {
+                    if (!string.IsNullOrEmpty(userParams.Verse))
+                        query = query.Where(s => s.Verse.ToLower().Contains(userParams.Verse.ToLower()) || s.Readers_Comments.ToLower().Contains(userParams.Verse.ToLower()));
+                } else {
+                    if (userParams.Comment.Equals("verse")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.Verse.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Comment.Equals("readers_Comments")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.Readers_Comments.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                }
+            }
+            
+            query = query.OrderBy(o => o.id);
+
+
+            return await PagedList<Ztgita_Full>.CreateAsync(query.AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<Ztgita_Full> GetBhaktivedantaByIdAsync(int id)

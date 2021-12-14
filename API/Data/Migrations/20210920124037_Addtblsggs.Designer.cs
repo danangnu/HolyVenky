@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210907063727_PostgresInitial")]
-    partial class PostgresInitial
+    [Migration("20210920124037_Addtblsggs")]
+    partial class Addtblsggs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -204,6 +204,48 @@ namespace API.Data.Migrations
                     b.ToTable("tSGGS_Final");
                 });
 
+            modelBuilder.Entity("API.Entities.tblsggs", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("BTags")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Bible")
+                        .HasColumnType("text");
+
+                    b.Property<string>("BookTitle")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gita")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MBs_version")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Quran")
+                        .HasColumnType("text");
+
+                    b.Property<string>("REf")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Readers_comment")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TextData")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Verse_Length")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("sggs");
+                });
+
             modelBuilder.Entity("API.Entities.tswami_gita_scsv", b =>
                 {
                     b.Property<int>("ID")
@@ -229,8 +271,8 @@ namespace API.Data.Migrations
                     b.Property<string>("MBVersion")
                         .HasColumnType("text");
 
-                    b.Property<int>("NUMBER")
-                        .HasColumnType("integer");
+                    b.Property<double>("NUMBER")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Quran")
                         .HasColumnType("text");

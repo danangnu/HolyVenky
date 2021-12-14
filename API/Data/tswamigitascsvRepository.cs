@@ -20,17 +20,33 @@ namespace API.Data
         {
             var query = _context.tswami_gita_scsv.AsQueryable();
 
-            if (!string.IsNullOrEmpty(userParams.Verse))
-                query = query.Where(s => s.VERSE.Contains(userParams.Verse));
-            
             if (!string.IsNullOrEmpty(userParams.Comment))
-                query = query.Where(s => s.COMMENT.Contains(userParams.Comment));
-
-            if (!string.IsNullOrEmpty(userParams.Chapter))
-                query = query.Where(s => s.Chapter.Contains(userParams.Chapter));
-
-            if (!string.IsNullOrEmpty(userParams.IGS))
-                query = query.Where(s => s.IGS.Contains(userParams.IGS));
+            {
+                if (userParams.Comment.Equals("all")) {
+                    if (!string.IsNullOrEmpty(userParams.Verse))
+                        query = query.Where(s => s.VERSE.ToLower().Contains(userParams.Verse.ToLower()) || s.COMMENT.ToLower().Contains(userParams.Verse.ToLower()) 
+                            || s.Chapter.ToLower().Contains(userParams.Verse.ToLower()) || s.IGS.ToLower().Contains(userParams.Verse.ToLower()));
+                } else {
+                    if (userParams.Comment.Equals("verse")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.VERSE.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Comment.Equals("comment")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.COMMENT.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Comment.Equals("chapter")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.Chapter.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Comment.Equals("igs")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.IGS.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                }
+            }
+            
+            query = query.OrderBy(o => o.ID);
 
             return await PagedList<tswami_gita_scsv>.CreateAsync(query.AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }

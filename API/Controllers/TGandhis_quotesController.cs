@@ -24,6 +24,10 @@ namespace API.Controllers
         {
             var tgandhis_quotes = await _itgandhisquotesRepository.GetGandhiAsync(userParams);
 
+            if (tgandhis_quotes.Count<=0) {
+                return BadRequest("Data Not Found");
+            }
+
             Response.AddPaginationHeader(tgandhis_quotes.CurrentPage, tgandhis_quotes.PageSize, tgandhis_quotes.TotalCount, tgandhis_quotes.TotalPages);
 
             return Ok(tgandhis_quotes);

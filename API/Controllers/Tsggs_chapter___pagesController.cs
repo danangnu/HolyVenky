@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -23,6 +21,10 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<Tsggs_chapter___pages>>> GetTsggs_chapter___pagess([FromQuery]UserParams userParams)
         {
             var tsggs_chapter___pages = await _itsggschapterpagesRepository.GetSChapterAsync(userParams);
+
+            if (tsggs_chapter___pages.Count<=0) {
+                return BadRequest("Data Not Found");
+            }
 
             Response.AddPaginationHeader(tsggs_chapter___pages.CurrentPage, tsggs_chapter___pages.PageSize, tsggs_chapter___pages.TotalCount, tsggs_chapter___pages.TotalPages);
 

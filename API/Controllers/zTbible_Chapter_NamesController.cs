@@ -24,6 +24,10 @@ namespace API.Controllers
         {
             var ztbible_chapter_names = await _iztbiblechapternamesRepository.GetBChapterAsync(userParams);
 
+            if (ztbible_chapter_names.Count<=0) {
+                return BadRequest("Data Not Found");
+            }
+
             Response.AddPaginationHeader(ztbible_chapter_names.CurrentPage, ztbible_chapter_names.PageSize, ztbible_chapter_names.TotalCount, ztbible_chapter_names.TotalPages);
 
             return Ok(ztbible_chapter_names);

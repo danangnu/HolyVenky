@@ -23,6 +23,10 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<TBible>>> GetTBibles([FromQuery]UserParams userParams)
         {
             var bibles = await _bibleRepository.GetTBiblesAsync(userParams);
+            
+            if (bibles.Count<=0) {
+                return BadRequest("Data Not Found");
+            }
 
             Response.AddPaginationHeader(bibles.CurrentPage, bibles.PageSize, bibles.TotalCount, bibles.TotalPages);
 
@@ -55,7 +59,7 @@ namespace API.Controllers
 
             if (await _bibleRepository.SaveAllAsync()) return NoContent();
 
-            return BadRequest("Failed to update hadiths");
+            return BadRequest("Failed to update table Bible");
         }
     }
 }

@@ -6,7 +6,6 @@ namespace API.DTOs
     {
         [Required]
         public string BookTitle { get; set; }
-        [Required]
         public string REf { get; set; }
         [Required]
         public string TextData { get; set; }

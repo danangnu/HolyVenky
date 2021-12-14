@@ -24,6 +24,10 @@ namespace API.Controllers
         {
             var tsggs_final = await _itsggsFinalRepository.GetGurumukhiAsync(userParams);
 
+            if (tsggs_final.Count<=0) {
+                return BadRequest("Data Not Found");
+            }
+
             Response.AddPaginationHeader(tsggs_final.CurrentPage, tsggs_final.PageSize, tsggs_final.TotalCount, tsggs_final.TotalPages);
 
             return Ok(tsggs_final);

@@ -22,6 +22,10 @@ namespace API.Controllers
         {
             var tswami_gita_scsv = await _itswamigitascsvRepository.GetPurohitAsync(userParams);
 
+            if (tswami_gita_scsv.Count<=0) {
+                return BadRequest("Data Not Found");
+            }
+
             Response.AddPaginationHeader(tswami_gita_scsv.CurrentPage, tswami_gita_scsv.PageSize, tswami_gita_scsv.TotalCount, tswami_gita_scsv.TotalPages);
 
             return Ok(tswami_gita_scsv);

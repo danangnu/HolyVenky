@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Helpers;
@@ -17,8 +18,14 @@ namespace API.Data
 
         public async Task<PagedList<TGandhis_quotes>> GetGandhiAsync(UserParams userParams)
         {
-            var query = _context.TGandhis_quotes.AsNoTracking();
-            return await PagedList<TGandhis_quotes>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+            var query = _context.TGandhis_quotes.AsQueryable();
+
+            if (!string.IsNullOrEmpty(userParams.Field1))
+                query = query.Where(s => s.Field1.Contains(userParams.Field1));
+            
+            query = query.OrderBy(o => o.ID);
+
+            return await PagedList<TGandhis_quotes>.CreateAsync(query.AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<TGandhis_quotes> GetGandhiByIdAsync(int id)

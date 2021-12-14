@@ -11,6 +11,7 @@ namespace API.Data
 
         public DbSet<Hadiths> Hadiths { get; set; }
         public DbSet<TBible> tBible { get; set; }
+        public DbSet<tblsggs> tblsggs { get; set; }
         public DbSet<TGandhis_quotes> TGandhis_quotes { get; set; }
         public DbSet<Tsggs_chapter___pages> Tsggs_chapter___pages { get; set; }
         public DbSet<tSGGS_Final> tSGGS_Final { get; set; }

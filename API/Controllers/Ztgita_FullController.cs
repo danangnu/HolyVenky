@@ -24,6 +24,10 @@ namespace API.Controllers
         {
             var ztgita_full = await _iztgitafullRepository.GetBhaktivedantaAsync(userParams);
 
+            if (ztgita_full.Count<=0) {
+                return BadRequest("Data Not Found");
+            }
+
             Response.AddPaginationHeader(ztgita_full.CurrentPage, ztgita_full.PageSize, ztgita_full.TotalCount, ztgita_full.TotalPages);
 
             return Ok(ztgita_full);

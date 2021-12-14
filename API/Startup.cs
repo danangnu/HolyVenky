@@ -38,6 +38,7 @@ namespace API
             services.AddScoped<ItsggsFinalRepository, tSGGSFinalRepository>();
             services.AddScoped<IHadithsRepository, HadithsRepository>();
             services.AddScoped<ITBibleRepository, TBibleRepository>();
+            services.AddScoped<ISggsRepository, SggsRepository>();
             services.AddDbContext<DataContext>(options =>
             {
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -88,12 +89,12 @@ namespace API
         {
             app.UseMiddleware<ExceptionMiddleware>();
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            //app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+            //app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseAuthorization();
 

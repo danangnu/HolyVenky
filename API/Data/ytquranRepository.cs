@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.DTOs;
 using API.Entities;
 using API.Helpers;
 using API.Interfaces;
@@ -22,10 +20,32 @@ namespace API.Data
             var query = _context.ytquran.AsQueryable();
 
             if (!string.IsNullOrEmpty(userParams.Sura))
-                query = query.Where(s => s.Sura.Contains(userParams.Sura));
-            
-            if (!string.IsNullOrEmpty(userParams.Verse))
-                query = query.Where(s => s.Verse.Contains(userParams.Verse));
+            {
+                if (userParams.Sura.Equals("all")) {
+                    if (!string.IsNullOrEmpty(userParams.Verse))
+                        query = query.Where(s => s.Verse.ToLower().Contains(userParams.Verse.ToLower()) || s.Sura.ToLower().Contains(userParams.Verse.ToLower()) 
+                            || s.Location.ToLower().Contains(userParams.Verse.ToLower()) || s.Commentary.ToLower().Contains(userParams.Verse.ToLower()));
+                } else {
+                    if (userParams.Sura.Equals("verse")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.Verse.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Sura.Equals("sura")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.Sura.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Sura.Equals("location")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.Location.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Sura.Equals("commentary")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.Commentary.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                }
+            }
+
+            query = query.OrderBy(o => o.ID);
 
             return await PagedList<ytquran>.CreateAsync(query.AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }

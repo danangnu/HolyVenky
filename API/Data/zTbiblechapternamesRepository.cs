@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Helpers;
@@ -17,8 +18,14 @@ namespace API.Data
 
         public async Task<PagedList<zTbible_Chapter_Names>> GetBChapterAsync(UserParams userParams)
         {
-            var query = _context.zTbible_Chapter_Names.AsNoTracking();
-            return await PagedList<zTbible_Chapter_Names>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+            var query = _context.zTbible_Chapter_Names.AsQueryable();
+        
+            if (!string.IsNullOrEmpty(userParams.Field2))
+                query = query.Where(s => s.Field2.ToLower().Contains(userParams.Field2.ToLower()));
+
+            query = query.OrderBy(o => o.ID);
+
+            return await PagedList<zTbible_Chapter_Names>.CreateAsync(query.AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<zTbible_Chapter_Names> GetBChapterByIdAsync(int id)

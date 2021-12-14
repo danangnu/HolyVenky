@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Helpers;
@@ -22,8 +23,37 @@ namespace API.Data
 
         public async Task<PagedList<tSGGS_Final>> GetGurumukhiAsync(UserParams userParams)
         {
-            var query = _context.tSGGS_Final.AsNoTracking();
-            return await PagedList<tSGGS_Final>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+            var query = _context.tSGGS_Final.AsQueryable();
+
+            if (!string.IsNullOrEmpty(userParams.Comment))
+            {
+                if (userParams.Comment.Equals("all")) {
+                    if (!string.IsNullOrEmpty(userParams.Verse))
+                        query = query.Where(s => s.vERSE.ToLower().Contains(userParams.Verse.ToLower()) || s.comment.ToLower().Contains(userParams.Verse.ToLower()) 
+                            || s.Gurumukhi.ToLower().Contains(userParams.Verse.ToLower()) || s.Trans.ToLower().Contains(userParams.Verse.ToLower()));
+                } else {
+                    if (userParams.Comment.Equals("verse")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.vERSE.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Comment.Equals("comment")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.comment.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Comment.Equals("gurumukhi")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.Gurumukhi.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                    if (userParams.Comment.Equals("trans")) {
+                        if (!string.IsNullOrEmpty(userParams.Verse))
+                            query = query.Where(s => s.Trans.ToLower().Contains(userParams.Verse.ToLower()));
+                    }
+                }
+            }
+
+            query = query.OrderBy(o => o.ID);
+
+            return await PagedList<tSGGS_Final>.CreateAsync(query.AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<bool> SaveAllAsync()
