@@ -1,0 +1,89 @@
+<div class="col-8">
+    <div class="alert alert-info" *ngIf="editForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
+    </div>
+</div>
+<form #editForm="ngForm" (ngSubmit)="updateBhaktivedanta()">
+  <h2 style="color:#7015E9" class="text-center">Gita by Bhaktivedanta</h2>
+    <div class="form-group">
+            <div class="form-inline">
+                <label class="ml-3" style="font-size: 16pt;">Ref:&nbsp; </label>
+                <input type="<text>" class="form-control w-10" style="font-size: 16pt;color: red;" name="ref" *ngIf="ztgita_full" [(ngModel)]="ztgita_full.ref">
+                <label class="ml-3" style="font-size: 16pt;">Verse Length:&nbsp; </label>
+                <input type="<text>" class="form-control w-10" style="font-size: 16pt;color: rebeccapurple;" name="verse_Length" *ngIf="ztgita_full" [(ngModel)]="ztgita_full.verse_Length">
+                <button class="ml-5" type="button" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#basicExample"
+                  (click)="frame.show()" mdbWavesEffect>Find Records</button>
+                <button (click)="resetFilters()" type="button" class="btn btn-info ml-1" type="button">Reset Filters</button>
+                
+            </div>
+    </div>
+  <hr>
+  <div class="form-group w-100">
+        <div class="form-inline">
+            <a >&nbsp;</a>
+            <a (click)="firsts()" [class.firsts]="firsts" style="right: 500px;position: absolute;" routerLink='/bhaktivedanta/{{selectedIndex}}'> First &raquo;</a>
+            <a [attr.href]="isDisabled"
+              [class.previous] = "previous"
+              (click)="!isDisabled && previous()" style="right: 400px;position: absolute;"
+              routerLink='/bhaktivedanta/{{selectedIndex}}'>&laquo; Previous</a>
+              <a (click)="next()" [class.next]="next" style="right: 328px;position: absolute;" routerLink='/bhaktivedanta/{{selectedIndex}}'>Next &raquo;</a>
+              <button [disabled]="!editForm.dirty" class="btn btn-success mr-2" style="right: 132px;position: absolute;" type="submit"> Save</button>
+              <button class="btn btn-warning mr-2" (click)="cancel()" style="right: 12px;position: absolute;" type="button"> Cancel</button>
+        </div>
+  </div>
+  <hr>
+<div class="form-group">
+    <div class="form-inline">
+      <textarea rows="6" type="text" class="form-control w-100" name="verse" style="color:#A30000;font-size: 16pt;"
+        *ngIf="ztgita_full" [(ngModel)]="ztgita_full.verse" placeholder="Verse"></textarea>
+    </div>
+    <div class="form-inline mt-1">
+            <textarea rows="2" type="text" class="form-control w-100" name="readers_Comments" style="font-size: 16pt;color: forestgreen;" 
+            *ngIf="ztgita_full" [(ngModel)]="ztgita_full.readers_Comments" placeholder="Readers Comments"></textarea>
+    </div>
+</div>
+</form>
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Find Record</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <mdb-icon fas icon="search" class="prefix grey-text"></mdb-icon>
+          <input type="text" id="defaultForm-email" [formControl]="verse" class="form-control"
+                 mdbInput mdbValidate>
+          <label for="defaultForm-email">Your search</label>
+          <mdb-error
+            *ngIf="verse.invalid && (verse.dirty || verse.touched)">
+            Input invalid
+          </mdb-error>
+          <mdb-success
+            *ngIf="verse.valid && (verse.dirty || verse.touched)">Input
+            valid
+          </mdb-success>
+        </div>
+
+        <div class="md-form mb-4">
+          <div class="form-group">
+            <mat-select [formControl]="comment" placeholder="Select field" name="item">
+              <mat-option *ngFor="let item of languageObjects" [value]="item.id">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </div>
+          
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" (click)="onClick(); frame.hide()" mdbBtn color="default" class="waves-light" mdbWavesEffect>Find</button>
+      </div>
+    </div>
+  </div>
+</div>

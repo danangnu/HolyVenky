@@ -1,0 +1,99 @@
+<div class="col-8">
+    <div class="alert alert-info" *ngIf="editForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
+    </div>
+</div>
+<form #editForm="ngForm" (ngSubmit)="updateQuran()">
+  <h3 style="color:#7015E9" class="text-center">When they hear what was revealed to the messenger, you see their eyes flooding with tears as they recognize the truth therein, and they say, "Our Lord, we have believed, so count us among the witnesses.</h3>
+    <div class="form-group">
+            <div class="form-inline">
+                <label class="ml-3" style="font-size: 16pt;">ChapterNVerse: </label>
+                <input type="<text>" class="form-control w-10" style="font-size: 16pt;" name="chaperNVerse" *ngIf="ytquran" [(ngModel)]="ytquran.chaperNVerse">
+                <label class="ml-3" style="font-size: 16pt;">Ref:&nbsp; </label>
+                <input type="<text>" class="form-control w-30" style="font-size: 16pt;" name="sura" *ngIf="ytquran" [(ngModel)]="ytquran.sura">
+                <button class="ml-5" type="button" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#basicExample"
+                  (click)="frame.show()" mdbWavesEffect>Find Records</button>
+                <button (click)="resetFilters()" type="button" class="btn btn-info ml-1" type="button">Reset Filters</button>
+                
+            </div>
+    </div>
+  <hr>
+  <div class="form-group w-100">
+        <div class="form-inline">
+            <a >&nbsp;</a>
+            <a (click)="firsts()" [class.firsts]="firsts" style="right: 500px;position: absolute;" routerLink='/quran/{{selectedIndex}}'> First &raquo;</a>
+            <a [attr.href]="isDisabled"
+              [class.previous] = "previous"
+              (click)="!isDisabled && previous()" style="right: 400px;position: absolute;"
+              routerLink='/quran/{{selectedIndex}}'>&laquo; Previous</a>
+              <a (click)="next()" [class.next]="next" style="right: 328px;position: absolute;" routerLink='/quran/{{selectedIndex}}'>Next &raquo;</a>
+              <button [disabled]="!editForm.dirty" class="btn btn-success mr-2" style="right: 132px;position: absolute;" type="submit"> Save</button>
+              <button class="btn btn-warning mr-2" (click)="cancel()" style="right: 12px;position: absolute;" type="button"> Cancel</button>
+        </div>
+  </div>
+  <hr>
+<div class="form-group">
+    <div class="form-inline">
+      <textarea rows="6" type="text" class="form-control w-100" name="verse" style="color:forestgreen;font-size: 16pt;"
+        *ngIf="ytquran" [(ngModel)]="ytquran.verse" placeholder="Verse"></textarea>
+    </div>
+    <div class="form-inline mt-1">
+      <textarea rows="3" type="text" class="form-control w-100" name="gita_Link" style="font-size: 16pt;color: red;" 
+          *ngIf="ytquran" [(ngModel)]="ytquran.gita_Link" placeholder="Gita"></textarea>    
+    </div>
+    <div class="form-inline mt-1">
+      <textarea rows="3" type="text" class="form-control w-100" name="bible_Link" style="font-size: 16pt;color: blue;"
+        *ngIf="ytquran" [(ngModel)]="ytquran.bible_Link" placeholder="Bible"></textarea>
+    </div>
+    <div class="form-inline mt-1">
+        <textarea rows="4" type="text" class="form-control w-40" id="gita" name="mB_s_Version" style="font-size: 16pt;"
+            *ngIf="ytquran" [(ngModel)]="ytquran.mB_s_Version" placeholder="AUTHORS VIEWS"></textarea>
+        <textarea rows="4" type="text" class="form-control w-40" id="commentary" name="commentary" style="font-size: 16pt;color:#d2691e; right: 12px;position: absolute;"
+            *ngIf="ytquran" [(ngModel)]="ytquran.commentary" placeholder="Commentary BY READER"></textarea>
+    </div>
+</div>
+</form>
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Find Record</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <mdb-icon fas icon="search" class="prefix grey-text"></mdb-icon>
+          <input type="text" id="defaultForm-email" [formControl]="verse" class="form-control"
+                 mdbInput mdbValidate>
+          <label for="defaultForm-email">Your search</label>
+          <mdb-error
+            *ngIf="verse.invalid && (verse.dirty || verse.touched)">
+            Input invalid
+          </mdb-error>
+          <mdb-success
+            *ngIf="verse.valid && (verse.dirty || verse.touched)">Input
+            valid
+          </mdb-success>
+        </div>
+
+        <div class="md-form mb-4">
+          <div class="form-group">
+            <mat-select [formControl]="sura" placeholder="Select field" name="item">
+              <mat-option *ngFor="let item of languageObjects" [value]="item.id">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </div>
+          
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" (click)="onClick(); frame.hide()" mdbBtn color="default" class="waves-light" mdbWavesEffect>Find</button>
+      </div>
+    </div>
+  </div>
+</div>

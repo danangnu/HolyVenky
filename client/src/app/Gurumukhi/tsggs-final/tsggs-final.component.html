@@ -1,0 +1,69 @@
+<div class="col-8">
+    <div class="alert alert-info" *ngIf="AddnewForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
+    </div>
+</div>
+<form #AddnewForm="ngForm" (ngSubmit)="addnew()" autocomplete="off">
+    <h2 class="text-center text-primary">Shri Guru Granth Sahib SGGS + Gurumukhi</h2>
+    <hr>
+    <div class="form-group">
+        <input type="text" class="form-control" name="line_number" 
+            [(ngModel)]="model.line_number" placeholder="Line Number">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="page_No" 
+            [(ngModel)]="model.page_No" placeholder="Page No">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="vERSE" 
+            [(ngModel)]="model.vERSE" placeholder="Verse">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="field1" 
+            [(ngModel)]="model.field1" placeholder="Field1">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="comment" 
+            [(ngModel)]="model.comment" placeholder="Comment">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="gurumukhi" 
+            [(ngModel)]="model.gurumukhi" placeholder="Gurumukhi">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="trans" 
+            [(ngModel)]="model.trans" placeholder="Trans">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="gita_Ref" 
+            [(ngModel)]="model.gita_Ref" placeholder="Gita Ref">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="bible_Ref" 
+            [(ngModel)]="model.bible_Ref" placeholder="Bible Ref">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="qUran_Ref" 
+            [(ngModel)]="model.qUran_Ref" placeholder="Quran Ref">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="mb_version" 
+            [(ngModel)]="model.mb_version" placeholder="Mb Version">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="raag_english" 
+            [(ngModel)]="model.raag_english" placeholder="Raag English">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="raag_Punjabi" 
+            [(ngModel)]="model.raag_Punjabi" placeholder="Raag Punjabi">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="raag_Trans" 
+            [(ngModel)]="model.raag_Trans" placeholder="Raag Trans">
+    </div>
+    <div class="form-group text-center">
+        <button class="btn btn-success mr-2" type="submit"> Save</button>
+        <button class="btn btn-warning mr-2" (click)="cancel()" type="button"> Cancel</button>
+    </div>
+</form>

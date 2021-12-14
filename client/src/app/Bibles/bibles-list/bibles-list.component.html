@@ -1,0 +1,57 @@
+<div>
+  <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadBible()" autocomplete="off">
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" routerLink='/biblesadd'>Add New</button>
+      <label class="ml-3">Chapter: </label>
+      <input type="<text>" class="form-control ml-1" name="verse" [(ngModel)]="userParams.bookTitle">
+        <label class="ml-3">Verse: </label>
+        <input type="<text>" class="form-control ml-1" name="comment" [(ngModel)]="userParams.textData">
+        <button type="button" class="btn btn-secondary ml-3" type="submit">Apply Filters</button>
+        <button (click)="resetFilters()" type="button" class="btn btn-info ml-1" type="submit">Reset Filters</button>
+    </div>
+  </form>
+</div>
+<div class="lessons-table mat-elevation-z8">
+  <table mat-table [dataSource]="tbible | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems}">
+    <!-- Position Column -->
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td class="align-top" mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="BookTitle">
+      <th mat-header-cell *matHeaderCellDef> Chapter </th>
+      <td class="align-top" mat-cell *matCellDef="let element">{{element.bookTitle}}</td>
+    </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Ref">
+      <th mat-header-cell *matHeaderCellDef> Ref </th>
+      <td class="align-top" mat-cell *matCellDef="let element"> {{element.rEf}} </td>
+    </ng-container>
+    <ng-container matColumnDef="TextData">
+      <th class="w-100" mat-header-cell *matHeaderCellDef> Verse </th>
+      <td class="align-top" mat-cell *matCellDef="let element"> <font [color]="'#0000FF'">{{element.textData}}</font> </td>
+    </ng-container>
+    <ng-container matColumnDef="verse_Length">
+      <th mat-header-cell *matHeaderCellDef> Verse Length </th>
+      <td class="align-top" mat-cell *matCellDef="let element"> {{element.verse_Length}} </td>
+    </ng-container>
+    <ng-container matColumnDef="quran">
+      <th class="w-100"  mat-header-cell *matHeaderCellDef> Quran </th>
+      <td style="white-space: nowrap;text-overflow:ellipsis; overflow: hidden; max-width:10px;" class="align-top" mat-cell *matCellDef="let element"> 
+        <span><font [color]="'#228B22'">{{element.quran}}</font></span> </td>
+    </ng-container>
+    <!-- Get Details -->
+    <ng-container matColumnDef="getdetails">
+      <th mat-header-cell *matHeaderCellDef> Details </th>
+      <td class="align-top" mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" routerLink='/bibles/{{element.id}}'>Get Details</button> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination-controls
+      (pageChange)="onPageChanged($event)">
+    </pagination-controls>
+  </div>
+</div>

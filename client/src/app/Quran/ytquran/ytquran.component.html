@@ -1,0 +1,69 @@
+<div class="col-8">
+    <div class="alert alert-info" *ngIf="AddnewForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
+    </div>
+</div>
+<form #AddnewForm="ngForm" (ngSubmit)="addnew()" autocomplete="off">
+    <h2 class="text-center text-primary">Holy Quran</h2>
+    <hr>
+    <div class="form-group">
+        <input type="text" class="form-control" name="line_NO_ID" 
+            [(ngModel)]="model.line_NO_ID" placeholder="Line No ID">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="chaperNVerse" 
+            [(ngModel)]="model.ChaperNVerse" placeholder="Chapter And Verse">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="verse" 
+            [(ngModel)]="model.verse" placeholder="Verse">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="sura" 
+            [(ngModel)]="model.sura" placeholder="Sura">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="location" 
+            [(ngModel)]="model.location" placeholder="Location">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="orderRevealed" 
+            [(ngModel)]="model.orderRevealed" placeholder="Order Revealed">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="gita_Link" 
+            [(ngModel)]="model.gita_Link" placeholder="Gita Link">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="bible_Link" 
+            [(ngModel)]="model.bible_Link" placeholder="Bible Link">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="commentary" 
+            [(ngModel)]="model.commentary" placeholder="Commentary">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="mB_s_Version" 
+            [(ngModel)]="model.mB_s_Version" placeholder="MBs Version">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="number" 
+            [(ngModel)]="model.number" placeholder="Number">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="vLen" 
+            [(ngModel)]="model.vLen" placeholder="VLen">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="id" 
+            [(ngModel)]="model.id" placeholder="ID">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="truncated_" 
+            [(ngModel)]="model.truncated_" placeholder="Truncated">
+    </div>
+    <div class="form-group text-center">
+        <button [disabled]="!AddnewForm.dirty" class="btn btn-success mr-2" type="submit"> Save</button>
+        <button class="btn btn-warning mr-2" (click)="cancel()" type="button"> Cancel</button>
+    </div>
+</form>

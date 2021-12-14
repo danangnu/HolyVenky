@@ -1,0 +1,10 @@
+
+<textarea 
+    [class.is-invalid]="ngControl.touched && ngControl.invalid"
+    type="text" 
+    class="form-control" 
+    rows={{rows}}
+    [formControl]="ngControl.control" 
+    placeholder={{label}}
+    style="font-size: 16px;"></textarea>
+<div class="invalid-feedback">Please enter a {{label}}</div>

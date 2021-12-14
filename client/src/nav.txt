@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container">
+      <a class="navbar-brand" href="#">Holy Venky</a>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Holy Bible</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Gurumukhi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Holy Quran</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Gita By swami Purohit</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Gita by Bhaktivedanta</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Bible Chapter Names</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">CHAPTERS IN SGGS & PAGE NOs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">The Hadiths</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Gandhis Quotes</a>
+        </li>
+      </ul>
+  </div>
+</nav>

@@ -1,0 +1,18 @@
+label {
+    display: inline-block;
+    text-align: right;
+  }
+
+  .w-88_5{
+    width: 85% !important;
+  }
+
+  .w-40{
+    width: 43% !important;
+  }
+
+  .w-25{
+    width: 25% !important;
+  }
+
+  div.inline { float:left; }

@@ -1,0 +1,33 @@
+<div class="col-8">
+    <div class="alert alert-info" *ngIf="AddnewForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
+    </div>
+</div>
+<form #AddnewForm="ngForm" (ngSubmit)="addnew()" autocomplete="off">
+    <h2 class="text-center text-primary">Gita by Bhaktivedanta</h2>
+    <hr>
+    <div class="form-group">
+        <input type="text" class="form-control" name="ref" 
+            [(ngModel)]="model.ref" placeholder="Ref">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="verse" 
+            [(ngModel)]="model.verse" placeholder="Verse">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="verse_Length" 
+            [(ngModel)]="model.verse_Length" placeholder="Verse Length">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="readers_Comments" 
+            [(ngModel)]="model.readers_Comments" placeholder="Readers Comments">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="field1" 
+            [(ngModel)]="model.field1" placeholder="Field1">
+    </div>
+    <div class="form-group text-center">
+        <button class="btn btn-success mr-2" type="submit"> Save</button>
+        <button class="btn btn-warning mr-2" (click)="cancel()" type="button"> Cancel</button>
+    </div>
+</form>

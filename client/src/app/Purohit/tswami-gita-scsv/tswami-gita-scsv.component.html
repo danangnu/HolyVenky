@@ -1,0 +1,61 @@
+<div class="col-8">
+    <div class="alert alert-info" *ngIf="AddnewForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
+    </div>
+</div>
+<form #AddnewForm="ngForm" (ngSubmit)="addnew()" autocomplete="off">
+    <h2 class="text-center text-primary">Gita By Swami Purohit</h2>
+    <hr>
+    <div class="form-group">
+        <input type="text" class="form-control" name="verse" 
+            [(ngModel)]="model.verse" placeholder="Verse">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="comment" 
+            [(ngModel)]="model.comment" placeholder="Comment">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="chapter" 
+            [(ngModel)]="model.chapter" placeholder="Chapter">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="igs" 
+            [(ngModel)]="model.igs" placeholder="IGS">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="number" 
+            [(ngModel)]="model.number" placeholder="Number">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="transliteration" 
+            [(ngModel)]="model.transliteration" placeholder="Transliteration">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="gita" 
+            [(ngModel)]="model.gita" placeholder="Gita">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="bible_Link" 
+            [(ngModel)]="model.bible_Link" placeholder="Bible Link">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="quran" 
+            [(ngModel)]="model.quran" placeholder="Quran">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="ssgSahib" 
+            [(ngModel)]="model.ssgSahib" placeholder="SSGSahib">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="mbVersion" 
+            [(ngModel)]="model.mbVersion" placeholder="MB Version">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="readers_Comments" 
+            [(ngModel)]="model.readers_Comments" placeholder="Readers Comments">
+    </div>
+    <div class="form-group text-center">
+        <button class="btn btn-success mr-2" type="submit"> Save</button>
+        <button class="btn btn-warning mr-2" (click)="cancel()" type="button"> Cancel</button>
+    </div>
+</form>

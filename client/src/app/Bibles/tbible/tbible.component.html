@@ -1,0 +1,122 @@
+<form [formGroup]='tbibleForm' (ngSubmit)="tbibleForm.valid && addnew()" autocomplete="off">
+    <h2 style="color:#7015E9" class="text-center">And Jesus answered him, saying, It is written, That man shall not live by bread alone, but by every word of God.</h2>
+    <hr>
+    <div class="form-group">
+        <div>
+          <a >&nbsp;</a>
+          <button [disabled]='!tbibleForm.valid' class="btn btn-success mr-2" style="right: 100px;position: absolute;" type="submit"> Save</button>
+          <button class="btn btn-warning mr-2" (click)="cancel()" style="right: 12px;position: absolute;" type="button"> Cancel</button>
+      </div>
+    </div>
+    <pre></pre>
+    <hr>
+    <div class="form-group">
+        <div class="form-inline">
+            <div class="inline w-25">
+                <label class="ml-1" style="font-size: 16px;">Chapter:&nbsp; </label>
+                <input 
+                    [class.is-invalid]='tbibleForm.get("bookTitle").errors && tbibleForm.get("bookTitle").touched'
+                    type="text" 
+                    class="form-control" 
+                    formControlName="bookTitle" 
+                    style="font-size: 16px;width: 75% !important;">
+                    <div align="center" class="invalid-feedback">Please enter a chapter</div>
+            </div>
+            <div class="inline mr-1 w-25">
+                <label class="ml-1" style="font-size: 16px;">Ref:&nbsp; </label>
+                <input
+                    type="text" 
+                    class="form-control" 
+                    formControlName="rEf" 
+                    style="font-size: 16px;width: 75% !important;">
+            </div>
+            <div class="inline w-30">
+                <label class="ml-1" style="font-size: 16px;">Verse Length:&nbsp; </label>
+                <input
+                [class.is-invalid]='tbibleForm.get("verse_Length").errors && tbibleForm.get("verse_Length").touched'
+                    type="number" 
+                    class="form-control" 
+                    formControlName="verse_Length" 
+                    style="font-size: 16px;width: 65% !important;">
+                    <div align="center" class="invalid-feedback">Please enter verse length</div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="ml-3" style="font-size: 16px;">Verse: </label>
+        <textarea 
+            [class.is-invalid]='tbibleForm.get("textData").errors && tbibleForm.get("textData").touched'
+            type="text" 
+            rows="6"
+            class="form-control" 
+            formControlName="textData" 
+            style="color:blue;font-size: 16px;width: 100% !important;"></textarea>
+            <div align="center" class="invalid-feedback">Please enter a verse</div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline w-100">
+            <label class="ml-5" style="font-size: 16px;">MBs Version: &nbsp;</label>
+            <input
+                    type="text" 
+                    class="form-control" 
+                    formControlName="mBs_version" 
+                    style="font-size: 16px;width: 87% !important;">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline w-100">
+            <label class=" mt-3 ml-2" style="font-size: 16px;">Readers Comment:&nbsp;&nbsp; </label>
+            <input
+                    type="text" 
+                    class="form-control" 
+                    formControlName="readers_comment" 
+                    style="font-size: 16px;width: 86.5% !important;">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <div class="inline w-50">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="gita" class="ml-2" style="font-size: 16px;">Gita:&nbsp; </label>
+                <textarea
+                    type="text" 
+                    rows="6"
+                    class="form-control" 
+                    formControlName="gita" 
+                    style="color:red;font-size: 16px;width: 86% !important;"></textarea>
+            </div>
+            <div class="inline w-50">
+                <label for="quran" class="ml-4" style="font-size: 16px;">Quran:&nbsp; </label>
+                <textarea 
+                    type="text" 
+                    rows="6" 
+                    class="form-control" 
+                    formControlName="quran"
+                    style="font-size: 16px;width: 86% !important;color:forestgreen;"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <div class="inline w-50">
+                <label for="ssgSahib" style="font-size: 16px;">SSGSahib:&nbsp; </label>
+                <textarea 
+                    type="text" 
+                    rows="5" 
+                    class="form-control" 
+                    formControlName="ssgSahib" 
+                    style="font-size: 16px;width: 85% !important;color:peru"></textarea>
+            </div>
+            <div class="inline w-50">
+                <label for="bTags" class="ml-4" style="font-size: 16px;">BTags:&nbsp; </label>
+                <textarea 
+                    type="text" 
+                    rows="5" 
+                    class="form-control" 
+                    formControlName="bTags"  
+                    style="font-size: 16px;width: 85% !important"></textarea>
+            </div>
+        </div>
+    </div>
+</form>

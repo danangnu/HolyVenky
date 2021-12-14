@@ -1,0 +1,47 @@
+<div>
+  <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadBhaktivedanta()" autocomplete="off">
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" routerLink='/bhaktivedantaadd'>Add New</button>
+      <label class="ml-3">Verse: </label>
+      <input type="<text>" class="form-control ml-3" name="verse" [(ngModel)]="userParams.verse">
+        <button type="button" class="btn btn-secondary ml-3" type="submit">Apply Filters</button>
+        <button (click)="resetFilters()" type="button" class="btn btn-info ml-1" type="submit">Reset Filters</button>
+    </div>
+  </form>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="ztgita_full | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems}">
+    <!-- Position Column -->
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Ref">
+      <th mat-header-cell *matHeaderCellDef> Ref </th>
+      <td mat-cell *matCellDef="let element"> {{element.ref}} </td>
+    </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Verse">
+      <th mat-header-cell *matHeaderCellDef> Verse </th>
+      <td mat-cell *matCellDef="let element"> {{element.verse}} </td>
+    </ng-container>
+    <!-- Verse_Length Column -->
+    <ng-container matColumnDef="Verse_Length">
+      <th mat-header-cell *matHeaderCellDef> Verse Length </th>
+      <td mat-cell *matCellDef="let element"> {{element.verse_Length}} </td>
+    </ng-container>
+    <!-- Get Details -->
+    <ng-container matColumnDef="getdetails">
+      <th mat-header-cell *matHeaderCellDef> Details </th>
+      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" routerLink='/bhaktivedanta/{{element.id}}'>Get Details</button> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination-controls
+      (pageChange)="onPageChanged($event)">
+    </pagination-controls>
+  </div>
+</div>

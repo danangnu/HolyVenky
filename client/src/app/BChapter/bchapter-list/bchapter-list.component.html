@@ -1,0 +1,37 @@
+<div>
+  <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadBChapter()" autocomplete="off">
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" routerLink='/bchapteradd'>Add New</button>
+      <label class="ml-3">Field2: </label>
+      <input type="<text>" class="form-control ml-3" name="field2" [(ngModel)]="userParams.field2">
+        <button type="button" class="btn btn-secondary ml-3" type="submit">Apply Filters</button>
+        <button (click)="resetFilters()" type="button" class="btn btn-info ml-1" type="submit">Reset Filters</button>
+    </div>
+  </form>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="ztbible_chapter_names | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems}">
+    <!-- Position Column -->
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Field2">
+      <th mat-header-cell *matHeaderCellDef> Field2 </th>
+      <td mat-cell *matCellDef="let element"> {{element.field2}} </td>
+    </ng-container>
+    <!-- Get Details -->
+    <ng-container matColumnDef="getdetails">
+      <th mat-header-cell *matHeaderCellDef> Details </th>
+      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" routerLink='/bchapter/{{element.id}}'>Get Details</button> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination-controls
+      (pageChange)="onPageChanged($event)">
+    </pagination-controls>
+  </div>
+</div>

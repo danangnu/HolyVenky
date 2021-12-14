@@ -1,0 +1,17 @@
+<div class="col-8">
+    <div class="alert alert-info" *ngIf="AddnewForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
+    </div>
+</div>
+<form #AddnewForm="ngForm" (ngSubmit)="addnew()" autocomplete="off">
+    <h2 class="text-center text-primary">Bible Chapter Names</h2>
+    <hr>
+    <div class="form-group">
+        <input type="text" class="form-control" name="field2" 
+            [(ngModel)]="model.field2" placeholder="Field2">
+    </div>
+    <div class="form-group text-center">
+        <button class="btn btn-success mr-2" type="submit"> Save</button>
+        <button class="btn btn-warning mr-2" (click)="cancel()" type="button"> Cancel</button>
+    </div>
+</form>

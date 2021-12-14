@@ -1,0 +1,33 @@
+<div class="col-8">
+    <div class="alert alert-info" *ngIf="AddnewForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
+    </div>
+</div>
+<form #AddnewForm="ngForm" (ngSubmit)="addnew()" autocomplete="off">
+    <h2 class="text-center text-primary">CHAPTERS IN SGGS & PAGE NOs</h2>
+    <hr>
+    <div class="form-group">
+        <input type="text" class="form-control" name="order_in_SGGS" 
+            [(ngModel)]="model.order_in_SGGS" placeholder="Order in SGGS">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="chapter___ragas" 
+            [(ngModel)]="model.chapter___ragas" placeholder="Chapter & Ragas">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="page_Range" 
+            [(ngModel)]="model.page_Range" placeholder="Page Range">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="page_Count" 
+            [(ngModel)]="model.page_Count" placeholder="Page Count">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="gurumkhi" 
+            [(ngModel)]="model.gurumkhi" placeholder="Gurumkhi">
+    </div>
+    <div class="form-group text-center">
+        <button class="btn btn-success mr-2" type="submit"> Save</button>
+        <button class="btn btn-warning mr-2" (click)="cancel()" type="button"> Cancel</button>
+    </div>
+</form>
