@@ -9,6 +9,7 @@ namespace API.Data
         {
         }
 
+        public DbSet<AppUser> Users { get; set; }
         public DbSet<Hadiths> Hadiths { get; set; }
         public DbSet<TBible> tBible { get; set; }
         public DbSet<tblsggs> tblsggs { get; set; }

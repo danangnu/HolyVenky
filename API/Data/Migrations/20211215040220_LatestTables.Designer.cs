@@ -7,26 +7,52 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+#nullable disable
+
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210920124037_Addtblsggs")]
-    partial class Addtblsggs
+    [Migration("20211215040220_LatestTables")]
+    partial class LatestTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.5")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("ProductVersion", "6.0.1")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("API.Entities.AppUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("bytea");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("bytea");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
 
             modelBuilder.Entity("API.Entities.Hadiths", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
                     b.Property<string>("Field1")
                         .HasColumnType("text");
@@ -43,8 +69,9 @@ namespace API.Data.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
                     b.Property<string>("BTags")
                         .HasColumnType("text");
@@ -81,12 +108,56 @@ namespace API.Data.Migrations
                     b.ToTable("tBible");
                 });
 
+            modelBuilder.Entity("API.Entities.tblsggs", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("BTags")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Bible")
+                        .HasColumnType("text");
+
+                    b.Property<string>("BookTitle")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gita")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MBs_version")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Quran")
+                        .HasColumnType("text");
+
+                    b.Property<string>("REf")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Readers_comment")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TextData")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("Verse_Length")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("tblsggs");
+                });
+
             modelBuilder.Entity("API.Entities.TGandhis_quotes", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Field1")
                         .HasColumnType("text");
@@ -100,8 +171,9 @@ namespace API.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Chapter___ragas")
                         .HasColumnType("text");
@@ -123,39 +195,13 @@ namespace API.Data.Migrations
                     b.ToTable("Tsggs_chapter___pages");
                 });
 
-            modelBuilder.Entity("API.Entities.Ztgita_Full", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int?>("Field1")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Readers_Comments")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Ref")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Verse")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("Verse_Length")
-                        .HasColumnType("integer");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Ztgita_Full");
-                });
-
             modelBuilder.Entity("API.Entities.tSGGS_Final", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Bible_Ref")
                         .HasColumnType("text");
@@ -204,54 +250,13 @@ namespace API.Data.Migrations
                     b.ToTable("tSGGS_Final");
                 });
 
-            modelBuilder.Entity("API.Entities.tblsggs", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("BTags")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Bible")
-                        .HasColumnType("text");
-
-                    b.Property<string>("BookTitle")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Gita")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MBs_version")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Quran")
-                        .HasColumnType("text");
-
-                    b.Property<string>("REf")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Readers_comment")
-                        .HasColumnType("text");
-
-                    b.Property<string>("TextData")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Verse_Length")
-                        .HasColumnType("integer");
-
-                    b.HasKey("id");
-
-                    b.ToTable("sggs");
-                });
-
             modelBuilder.Entity("API.Entities.tswami_gita_scsv", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Bible_Link")
                         .HasColumnType("text");
@@ -298,8 +303,9 @@ namespace API.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Bible_Link")
                         .HasColumnType("text");
@@ -349,8 +355,9 @@ namespace API.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Field2")
                         .HasColumnType("text");
@@ -358,6 +365,34 @@ namespace API.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("zTbible_Chapter_Names");
+                });
+
+            modelBuilder.Entity("API.Entities.Ztgita_Full", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int?>("Field1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Readers_Comments")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Ref")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Verse")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("Verse_Length")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Ztgita_Full");
                 });
 #pragma warning restore 612, 618
         }

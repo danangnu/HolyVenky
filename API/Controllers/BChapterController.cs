@@ -1,14 +1,12 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    public class BChapterController : BaseApiController
+  public class BChapterController : BaseApiController
     {
         private readonly DataContext _context;
         public BChapterController(DataContext context)
