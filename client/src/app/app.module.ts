@@ -57,6 +57,7 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { TextTextareaComponent } from './_forms/text-textarea/text-textarea.component';
 import { SggsComponent } from './Gurumukhi/sggs/sggs.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import { SggsComponent } from './Gurumukhi/sggs/sggs.component';
     DialogBoxComponent,
     TextInputComponent,
     TextTextareaComponent,
-    SggsComponent
+    SggsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
