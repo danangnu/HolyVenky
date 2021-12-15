@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -117,6 +117,7 @@ import { SggsComponent } from './Gurumukhi/sggs/sggs.component';
     MatPaginatorModule,
     NgxSpinnerModule,
     NgxPaginationModule,
+    BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     })
