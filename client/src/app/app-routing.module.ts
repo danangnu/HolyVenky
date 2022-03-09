@@ -32,46 +32,120 @@ import { TsggsChapterPagesComponent } from './SChapter/tsggs-chapter-pages/tsggs
 import { HadithsComponent } from './THadiths/hadiths/hadiths.component';
 import { ThadithsDetailComponent } from './THadiths/thadiths-detail/thadiths-detail.component';
 import { ThadithsListComponent } from './THadiths/thadiths-list/thadiths-list.component';
+import { UserAccountComponent } from './user-account/user-account.component';
 import { PreventUnsavedChangesAddGuard } from './_guards/prevent-unsaved-changes-add.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'bibles', component: BiblesListComponent},
-  {path: 'bibles/:id', component: BiblesDetailComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-  {path: 'biblesadd', component: TbibleComponent},
-  {path: 'gurumukhi', component: GurumukhiListComponent},
-  {path: 'gurumukhi/:id', component: SggsComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-  {path: 'gurumukhiadd', component: TsggsFinalComponent, canDeactivate: [PreventUnsavedChangesAddGuard]},
-  {path: 'quran', component: QuranListComponent},
-  {path: 'quran/:id', component: QuranDetailComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-  {path: 'quranadd', component: YtquranComponent, canDeactivate: [PreventUnsavedChangesAddGuard]},
-  {path: 'purohit', component: PurohitListComponent},
-  {path: 'purohit/:id', component: PurohitDetailComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-  {path: 'purohitadd', component: TswamiGitaScsvComponent, canDeactivate: [PreventUnsavedChangesAddGuard]},
-  {path: 'bhaktivedanta', component: BhaktivedantaListComponent},
-  {path: 'bhaktivedanta/:id', component: BhaktivedantaDetailComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-  {path: 'bhaktivedantaadd', component: ZtgitaFullComponent, canDeactivate: [PreventUnsavedChangesAddGuard]},
-  {path: 'bchapter', component: BchapterListComponent},
-  {path: 'bchapter/:id', component: BchapterDetailComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-  {path: 'bchapteradd', component: ZtbibleChapterNamesComponent, canDeactivate: [PreventUnsavedChangesAddGuard]},
-  {path: 'schapter', component: SchapterListComponent},
-  {path: 'schapter/:id', component: SchapterDetailComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-  {path: 'schapteradd', component: TsggsChapterPagesComponent, canDeactivate: [PreventUnsavedChangesAddGuard]},
-  {path: 'thadiths', component: ThadithsListComponent},
-  {path: 'thadiths/:id', component: ThadithsDetailComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-  {path: 'thadithsadd', component: HadithsComponent, canDeactivate: [PreventUnsavedChangesAddGuard]},
-  {path: 'gandhi', component: GandhiListComponent},
-  {path: 'gandhi/:id', component: GandhiDetailComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-  {path: 'gandhiadd', component: TgandhisQuotesComponent, canDeactivate: [PreventUnsavedChangesAddGuard]},
-  {path: 'errors', component: TestErrorsComponent},
-  {path: 'not-found', component: NotFoundComponent},
-  {path: 'server-error', component: ServerErrorComponent},
-  {path: '**', component: HomeComponent, pathMatch: 'full'},
+  { path: 'home', component: HomeComponent },
+  { path: 'bibles', component: BiblesListComponent },
+  {
+    path: 'bibles/:id',
+    component: BiblesDetailComponent,
+    canDeactivate: [PreventUnsavedChangesGuard],
+  },
+  { path: 'biblesadd', component: TbibleComponent },
+  { path: 'gurumukhi', component: GurumukhiListComponent },
+  {
+    path: 'gurumukhi/:id',
+    component: SggsComponent,
+    canDeactivate: [PreventUnsavedChangesGuard],
+  },
+  {
+    path: 'gurumukhiadd',
+    component: TsggsFinalComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  { path: 'quran', component: QuranListComponent },
+  {
+    path: 'quran/:id',
+    component: QuranDetailComponent,
+    canDeactivate: [PreventUnsavedChangesGuard],
+  },
+  {
+    path: 'quranadd',
+    component: YtquranComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  { path: 'purohit', component: PurohitListComponent },
+  {
+    path: 'purohit/:id',
+    component: PurohitDetailComponent,
+    canDeactivate: [PreventUnsavedChangesGuard],
+  },
+  {
+    path: 'purohitadd',
+    component: TswamiGitaScsvComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  { path: 'bhaktivedanta', component: BhaktivedantaListComponent },
+  {
+    path: 'bhaktivedanta/:id',
+    component: BhaktivedantaDetailComponent,
+    canDeactivate: [PreventUnsavedChangesGuard],
+  },
+  {
+    path: 'bhaktivedantaadd',
+    component: ZtgitaFullComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  { path: 'bchapter', component: BchapterListComponent },
+  {
+    path: 'bchapter/:id',
+    component: BchapterDetailComponent,
+    canDeactivate: [PreventUnsavedChangesGuard],
+  },
+  {
+    path: 'bchapteradd',
+    component: ZtbibleChapterNamesComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  { path: 'schapter', component: SchapterListComponent },
+  {
+    path: 'schapter/:id',
+    component: SchapterDetailComponent,
+    canDeactivate: [PreventUnsavedChangesGuard],
+  },
+  {
+    path: 'schapteradd',
+    component: TsggsChapterPagesComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  { path: 'thadiths', component: ThadithsListComponent },
+  {
+    path: 'thadiths/:id',
+    component: ThadithsDetailComponent,
+    canDeactivate: [PreventUnsavedChangesGuard],
+  },
+  {
+    path: 'thadithsadd',
+    component: HadithsComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  { path: 'gandhi', component: GandhiListComponent },
+  {
+    path: 'gandhi/:id',
+    component: GandhiDetailComponent,
+    canDeactivate: [PreventUnsavedChangesGuard],
+  },
+  {
+    path: 'gandhiadd',
+    component: TgandhisQuotesComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  {
+    path: 'user-account',
+    component: UserAccountComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  { path: 'errors', component: TestErrorsComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'server-error', component: ServerErrorComponent },
+  { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

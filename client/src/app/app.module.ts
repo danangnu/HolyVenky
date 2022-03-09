@@ -58,6 +58,7 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { TextTextareaComponent } from './_forms/text-textarea/text-textarea.component';
 import { SggsComponent } from './Gurumukhi/sggs/sggs.component';
 import { RegisterComponent } from './register/register.component';
+import { UserAccountComponent } from './user-account/user-account.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { RegisterComponent } from './register/register.component';
     TextInputComponent,
     TextTextareaComponent,
     SggsComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserAccountComponent
   ],
   imports: [
     BrowserModule,
