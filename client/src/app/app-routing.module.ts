@@ -26,6 +26,7 @@ import { TswamiGitaScsvComponent } from './Purohit/tswami-gita-scsv/tswami-gita-
 import { QuranDetailComponent } from './Quran/quran-detail/quran-detail.component';
 import { QuranListComponent } from './Quran/quran-list/quran-list.component';
 import { YtquranComponent } from './Quran/ytquran/ytquran.component';
+import { RegisterComponent } from './register/register.component';
 import { SchapterDetailComponent } from './SChapter/schapter-detail/schapter-detail.component';
 import { SchapterListComponent } from './SChapter/schapter-list/schapter-list.component';
 import { TsggsChapterPagesComponent } from './SChapter/tsggs-chapter-pages/tsggs-chapter-pages.component';
@@ -134,9 +135,13 @@ const routes: Routes = [
     canDeactivate: [PreventUnsavedChangesAddGuard],
   },
   {
+    path: 'register',
+    component: RegisterComponent,
+    canDeactivate: [PreventUnsavedChangesAddGuard],
+  },
+  {
     path: 'user-account',
     component: UserAccountComponent,
-    canDeactivate: [PreventUnsavedChangesAddGuard],
   },
   { path: 'errors', component: TestErrorsComponent },
   { path: 'not-found', component: NotFoundComponent },
