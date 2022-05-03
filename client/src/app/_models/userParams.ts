@@ -11,4 +11,5 @@ export class UserParams {
     field2: string;
     pageNumber= 1;
     pageSize= 10;
+    username: string;
 }

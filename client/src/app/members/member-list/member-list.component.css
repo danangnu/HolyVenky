@@ -1,0 +1,28 @@
+.mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 16px 12px 0;
+  background-color: #c6dfd7;
+  font-size: large;
+}
+
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 12px 16px 12px 0;
+}
+
+.mat-row:nth-child(even){
+  background-color: #e4f0ec;
+}
+
+.mat-row:nth-child(odd){
+  background-color:#ffffff;
+}
+
+.mat-primary {
+background-color: green;
+color: #fff;
+}

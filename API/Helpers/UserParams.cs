@@ -12,6 +12,7 @@ namespace API.Helpers
             set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
         }
 
+        public string Username { get; set; }
         public string Sura { get; set; }
         public string Verse { get; set; }
         public string Comment { get; set; }

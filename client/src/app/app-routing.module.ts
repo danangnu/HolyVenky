@@ -20,6 +20,7 @@ import { GurumukhiListComponent } from './Gurumukhi/gurumukhi-list/gurumukhi-lis
 import { SggsComponent } from './Gurumukhi/sggs/sggs.component';
 import { TsggsFinalComponent } from './Gurumukhi/tsggs-final/tsggs-final.component';
 import { HomeComponent } from './home/home.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 import { PurohitDetailComponent } from './Purohit/purohit-detail/purohit-detail.component';
 import { PurohitListComponent } from './Purohit/purohit-list/purohit-list.component';
 import { TswamiGitaScsvComponent } from './Purohit/tswami-gita-scsv/tswami-gita-scsv.component';
@@ -142,6 +143,10 @@ const routes: Routes = [
   {
     path: 'user-account',
     component: UserAccountComponent,
+  },
+  {
+    path: 'memberlist',
+    component: MemberListComponent,
   },
   { path: 'errors', component: TestErrorsComponent },
   { path: 'not-found', component: NotFoundComponent },
