@@ -1,14 +1,14 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    public class SChapterController : BaseApiController
+    [Authorize]
+  public class SChapterController : BaseApiController
     {
         private readonly DataContext _context;
         public SChapterController(DataContext context)

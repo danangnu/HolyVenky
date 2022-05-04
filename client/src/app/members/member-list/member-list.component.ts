@@ -12,7 +12,7 @@ import { UsersService } from 'src/app/_services/users.service';
   styleUrls: ['./member-list.component.css'],
 })
 export class MemberListComponent implements OnInit {
-  displayedColumns: string[] = ['Id', 'UserName'];
+  displayedColumns: string[] = ['Id', 'UserName','Access'];
   dataSource = new MatTableDataSource<Member>();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -26,8 +26,11 @@ export class MemberListComponent implements OnInit {
       id: {
         title: 'Id',
       },
-      field2: {
+      userName: {
         title: 'UserName',
+      },
+      access: {
+        title: 'Access',
       },
     },
   };

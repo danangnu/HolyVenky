@@ -1,13 +1,13 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+  [Authorize]
     public class QuranController : BaseApiController
     {
         private readonly DataContext _context;

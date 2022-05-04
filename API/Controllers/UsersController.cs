@@ -4,6 +4,7 @@ using API.Data;
 using API.Entities;
 using API.Extensions;
 using API.Helpers;
+using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,8 +14,8 @@ namespace API.Controllers
   public class UsersController : BaseApiController
   {
     private readonly DataContext _context;
-    private readonly MemberRepository _memberRepository;
-    public UsersController(DataContext context, MemberRepository memberRepository)
+    private readonly IMemberRepository _memberRepository;
+    public UsersController(DataContext context, IMemberRepository memberRepository)
     {
       _memberRepository = memberRepository;
       _context = context;

@@ -5,10 +5,12 @@ using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class Tsggs_chapter___pagesController : BaseApiController
     {
         private readonly ITsggschapterpagesRepository _itsggschapterpagesRepository;

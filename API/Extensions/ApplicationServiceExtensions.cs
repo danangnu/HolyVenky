@@ -12,6 +12,7 @@ namespace API.Extensions
   {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
+      services.AddScoped<IMemberRepository, MemberRepository>();
       services.AddScoped<ITgandhisquotesRepository, TGandhisquotesRepository>();
       services.AddScoped<ITsggschapterpagesRepository, TsggschapterpagesRepository>();
       services.AddScoped<IZtbiblechapternamesRepository, zTbiblechapternamesRepository>();

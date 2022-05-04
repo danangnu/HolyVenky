@@ -19,6 +19,17 @@
       placeholder="Password"
     />
   </div>
+  <div class="form-group">
+    <select class="form-control" id="selectOptions" (change)="selectChangeHandler($event)">
+      <option
+        *ngFor="let opt of options"
+        [selected]="opt === ngSelect"
+        [value]="opt.id"
+      >
+        {{ opt.title }}
+      </option>
+    </select>
+  </div>
   <div class="form-group text-center">
     <button class="btn btn-success mr-2" type="submit">Register</button>
     <button class="btn btn-default mr-2" (click)="cancel()" type="button">

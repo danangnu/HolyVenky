@@ -9,8 +9,13 @@ import { AccountService } from '../_services/account.service';
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   model: any = {};
+  selectedDevice: string;
+  options = [{ id: 'Admin', title: 'Administrator' }, { id: 'User', title: 'Regular User' }];
+  ngSelect = this.options[1];
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService) {
+    this.model.access = this.ngSelect.id;
+  }
 
   ngOnInit(): void {}
 
@@ -23,5 +28,10 @@ export class RegisterComponent implements OnInit {
 
   cancel() {
     this.cancelRegister.emit(false);
+  }
+
+  selectChangeHandler(event: any) {
+    this.model.access = event.target.value;
+    console.log(this.selectedDevice);
   }
 }

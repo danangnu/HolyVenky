@@ -30,6 +30,7 @@ namespace API.Controllers
       var user = new AppUser
       {
         UserName = registerDto.Username,
+        Access = registerDto.Access,
         PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
         PasswordSalt = hmac.Key
       };
@@ -40,6 +41,7 @@ namespace API.Controllers
       return new UserDto
       {
         Username = user.UserName,
+        Access = user.Access,
         Token = _tokenService.CreateToken(user)
       };
     }
@@ -63,6 +65,7 @@ namespace API.Controllers
       return new UserDto
       {
         Username = user.UserName,
+        Access = user.Access,
         Token = _tokenService.CreateToken(user)
       };
     }

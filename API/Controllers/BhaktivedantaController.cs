@@ -2,11 +2,13 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-  public class BhaktivedantaController : BaseApiController
+    [Authorize]
+    public class BhaktivedantaController : BaseApiController
     {
         private readonly DataContext _context;
         public BhaktivedantaController(DataContext context)
