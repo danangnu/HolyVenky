@@ -74,4 +74,8 @@ export class TsggsFinalService {
       })
     )
   }
+
+  getMax(): any {
+    return this.http.get(this.baseUrl + 'gurumukhi');
+  }
 }

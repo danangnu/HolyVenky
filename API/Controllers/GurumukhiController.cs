@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Authorize]
-  public class GurumukhiController : BaseApiController
+    public class GurumukhiController : BaseApiController
     {
         private readonly DataContext _context;
         public GurumukhiController(DataContext context)
@@ -41,6 +42,12 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return tSGGS_Final1;
+        }
+
+        [HttpGet]
+        public int GetMaxID()
+        {
+            return _context.tblsggs.Max(s => s.id);
         }
     }
 }

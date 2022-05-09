@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { TsggsFinalService } from 'src/app/_services/tsggs-final.service';
 @Component({
   selector: 'app-gurumukhi-detail',
   templateUrl: './gurumukhi-detail.component.html',
-  styleUrls: ['./gurumukhi-detail.component.css']
+  styleUrls: ['./gurumukhi-detail.component.css'],
 })
 export class GurumukhiDetailComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
@@ -22,54 +23,61 @@ export class GurumukhiDetailComponent implements OnInit {
   selectedIndex: number;
   rowIndex: number;
   userParams: UserParams;
-  languageObjects : fTsggs[];
+  languageObjects: fTsggs[];
 
-  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
+  @HostListener('window:beforeunload', ['$event']) unloadNotification(
+    $event: any
+  ) {
     if (this.editForm.dirty) {
       this.updateGurumukhi();
       $event.returnValue = true;
     }
   }
-  
-  constructor(private tsggsfinalService: TsggsFinalService, private route: ActivatedRoute, private toastr: ToastrService, 
-    private router: Router, private fb: FormBuilder) {
-      this.userParams = new UserParams();
-      this.selectedIndex = Number(this.route.snapshot.paramMap.get('id'));
-      if (this.selectedIndex <= 1)
-      {
-        this.isDisabled = true;
-      } else 
-      {
-        this.isDisabled = false;
-      }
-      if (localStorage.getItem('verseSearch') != null)
-        this.userParams.vERSE = localStorage.getItem('verseSearch');
-      if (localStorage.getItem('commentSearch') != null)
-        this.userParams.comment = localStorage.getItem('commentSearch');
-      if (localStorage.getItem('tsggs_Finals') != null)
-        this.tsggs_Finals = JSON.parse(localStorage.getItem("tsggs_Finals"));
-      if (localStorage.getItem('rowIndex') != null)
-        this.rowIndex = Number(localStorage.getItem('rowIndex'));
-      this.languageObjects = [
-          {id: "all", name: "All Fields"},
-          {id: "verse", name: "Verse"},
-          {id: "comment", name: "Comment"},
-          {id: "gurumukhi", name: "Gurumukhi"},
-          {id: "trans", name: "Trans"}
-        ]
-        this.userParams.bookTitle ="all";
-     }
+
+  constructor(
+    private tsggsfinalService: TsggsFinalService,
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
+    private router: Router,
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) {
+    this.userParams = new UserParams();
+    this.selectedIndex = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.selectedIndex <= 1) {
+      this.isDisabled = true;
+    } else {
+      this.isDisabled = false;
+    }
+    if (localStorage.getItem('verseSearch') != null)
+      this.userParams.vERSE = localStorage.getItem('verseSearch');
+    if (localStorage.getItem('commentSearch') != null)
+      this.userParams.comment = localStorage.getItem('commentSearch');
+    if (localStorage.getItem('tsggs_Finals') != null)
+      this.tsggs_Finals = JSON.parse(localStorage.getItem('tsggs_Finals'));
+    if (localStorage.getItem('rowIndex') != null)
+      this.rowIndex = Number(localStorage.getItem('rowIndex'));
+    this.languageObjects = [
+      { id: 'all', name: 'All Fields' },
+      { id: 'verse', name: 'Verse' },
+      { id: 'comment', name: 'Comment' },
+      { id: 'gurumukhi', name: 'Gurumukhi' },
+      { id: 'trans', name: 'Trans' },
+    ];
+    this.userParams.bookTitle = 'all';
+  }
 
   ngOnInit(): void {
     this.loadGurumukhi();
+    console.log('test');
     this.modalForm();
     this.setDefaultValue();
   }
 
-  setDefaultValue(){
+  setDefaultValue() {
     this.findForm.patchValue({
-      comment : this.languageObjects[0].id
-    })
+      comment: this.languageObjects[0].id,
+    });
   }
 
   modalForm() {
@@ -77,15 +85,14 @@ export class GurumukhiDetailComponent implements OnInit {
       vERSE: ['', Validators.required],
       comment: [''],
       pageNumber: [1],
-      pageSize: [20]
-
+      pageSize: [20],
     });
   }
 
   onClick() {
     //console.log("Submit button was clicked!" + this.userParams.textData);
-    localStorage.setItem("verseSearch", this.findForm.value.vERSE);
-    localStorage.setItem("commentSearch", this.findForm.value.comment);
+    localStorage.setItem('verseSearch', this.findForm.value.vERSE);
+    localStorage.setItem('commentSearch', this.findForm.value.comment);
     //console.log(this.findForm.value)
     this.loadGurumukhis();
   }
@@ -95,40 +102,53 @@ export class GurumukhiDetailComponent implements OnInit {
   }
 
   loadGurumukhis() {
-    this.tsggsfinalService.getGurumukhi(this.findForm.value).subscribe(response => {
-      this.tsggs_Finals = response.result;
-      this.pagination = response.pagination;
+    this.tsggsfinalService
+      .getGurumukhi(this.findForm.value)
+      .subscribe((response) => {
+        this.tsggs_Finals = response.result;
+        this.pagination = response.pagination;
 
-      if (localStorage.getItem('verseSearch') == null) {
-      } else {
-        if (localStorage.getItem('rowIndex') != null) {
-          this.rowIndex = Number(localStorage.getItem('rowIndex'));
-          ++this.rowIndex;
+        if (localStorage.getItem('verseSearch') == null) {
+        } else {
+          if (localStorage.getItem('rowIndex') != null) {
+            this.rowIndex = Number(localStorage.getItem('rowIndex'));
+            ++this.rowIndex;
+          } else {
+            this.rowIndex = 0;
+            localStorage.setItem('rowIndex', this.rowIndex.toString());
+          }
+          localStorage.setItem(
+            'tsggs_Finals',
+            JSON.stringify(this.tsggs_Finals)
+          );
         }
-        else {
-          this.rowIndex = 0;
-          localStorage.setItem("rowIndex", this.rowIndex.toString());
-        }
-        localStorage.setItem("tsggs_Finals", JSON.stringify(this.tsggs_Finals));
-      }
-      this.selectedIndex = Number(this.tsggs_Finals[this.rowIndex].id)
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['/gurumukhi/' + this.selectedIndex]));
-    });
+        this.selectedIndex = Number(this.tsggs_Finals[this.rowIndex].id);
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() =>
+            this.router.navigate(['/gurumukhi/' + this.selectedIndex])
+          );
+      });
   }
 
   loadGurumukhi() {
-    this.tsggsfinalService.getGurumukhi1(this.route.snapshot.paramMap.get('id')).subscribe(tsggs_Final => {
-      this.tsggs_Final = tsggs_Final;
-    })
+    this.tsggsfinalService
+      .getGurumukhi1(this.route.snapshot.paramMap.get('id'))
+      .subscribe((tsggs_Final) => {
+        this.tsggs_Final = tsggs_Final;
+      });
   }
 
   updateGurumukhi() {
-    this.tsggsfinalService.updateGurumukhi(this.tsggs_Final, this.route.snapshot.paramMap.get('id')).subscribe(() => {
-      this.toastr.success('Data updated successfully');
-      this.editForm.reset(this.tsggs_Final);
-      this.router.navigate(['/gurumukhi']);
-    })
+    this.tsggsfinalService
+      .updateGurumukhi(this.tsggs_Final, this.route.snapshot.paramMap.get('id'))
+      .subscribe(() => {
+        this.toastr.success('Data updated successfully');
+        this.editForm.reset(this.tsggs_Final);
+        this.router.navigate([
+          '/gurumukhi/' + this.route.snapshot.paramMap.get('id'),
+        ]);
+      });
   }
 
   cancel() {
@@ -142,59 +162,74 @@ export class GurumukhiDetailComponent implements OnInit {
   }
 
   next() {
-    this.route.paramMap.subscribe(params => {
-      if (localStorage.getItem('verseSearch') == null)
-      {
+    this.route.paramMap.subscribe((params) => {
+      if (localStorage.getItem('verseSearch') == null) {
         var id = params.get('id');
-        this.selectedIndex = (Number(id));
+        this.selectedIndex = Number(id);
         ++this.selectedIndex;
-      } else 
-      {
+      } else {
         ++this.rowIndex;
         if (localStorage.getItem('tsggs_Finals') != null)
-          this.tsggs_Finals = JSON.parse(localStorage.getItem("tsggs_Finals"));
-        localStorage.setItem("rowIndex", this.rowIndex.toString());
+          this.tsggs_Finals = JSON.parse(localStorage.getItem('tsggs_Finals'));
+        localStorage.setItem('rowIndex', this.rowIndex.toString());
         //console.log(this.tbibles[this.rowIndex].id);
         this.selectedIndex = this.tsggs_Finals[this.rowIndex].id;
       }
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['/gurumukhi/' + this.selectedIndex]));
+      this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => this.router.navigate(['/gurumukhi/' + this.selectedIndex]));
+      this.tsggsfinalService.getMax().subscribe((response) => {
+        if (this.selectedIndex == response) {
+          this.isDisabled = true;
+        } else {
+          this.isDisabled = false;
+        }
+      });
     });
- }
+  }
 
   previous() {
-    this.route.paramMap.subscribe(params => {
-      if (localStorage.getItem('verseSearch') == null && localStorage.getItem('commentSearch') == null) {
+    this.route.paramMap.subscribe((params) => {
+      if (
+        localStorage.getItem('verseSearch') == null &&
+        localStorage.getItem('commentSearch') == null
+      ) {
         var id = params.get('id');
-        this.selectedIndex = (Number(id));
+        this.selectedIndex = Number(id);
         --this.selectedIndex;
       } else {
-          if (this.rowIndex >= 0) {
-            --this.rowIndex;
-            if (localStorage.getItem('tsggs_Finals') != null)
-              this.tsggs_Finals = JSON.parse(localStorage.getItem("tsggs_Finals"));
-            localStorage.setItem("rowIndex", this.rowIndex.toString());
-            //console.log(this.tbibles[this.rowIndex].id);
-            this.selectedIndex = this.tsggs_Finals[this.rowIndex].id;
-          }
+        if (this.rowIndex >= 0) {
+          --this.rowIndex;
+          if (localStorage.getItem('tsggs_Finals') != null)
+            this.tsggs_Finals = JSON.parse(
+              localStorage.getItem('tsggs_Finals')
+            );
+          localStorage.setItem('rowIndex', this.rowIndex.toString());
+          //console.log(this.tbibles[this.rowIndex].id);
+          this.selectedIndex = this.tsggs_Finals[this.rowIndex].id;
+        }
       }
       //console.log(id)
       if (this.selectedIndex >= 0) {
-        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['/gurumukhi/' + this.selectedIndex]));
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() =>
+            this.router.navigate(['/gurumukhi/' + this.selectedIndex])
+          );
       }
     });
-   }
+  }
 
   firsts() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       var id = params.get('id');
-      this.selectedIndex = (Number(id));
+      this.selectedIndex = Number(id);
       this.selectedIndex = 1;
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-          this.router.navigate(['/gurumukhi/' + this.selectedIndex]));
+      this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => this.router.navigate(['/gurumukhi/' + this.selectedIndex]));
     });
-   }
+  }
 
   resetFilters() {
     this.userParams = new UserParams();
@@ -208,13 +243,13 @@ export class GurumukhiDetailComponent implements OnInit {
   get vERSE() {
     return this.findForm.get('vERSE');
   }
-  
+
   get comment() {
     return this.findForm.get('comment');
   }
 }
 
-interface fTsggs{
-  id:string;
-  name:string;
+interface fTsggs {
+  id: string;
+  name: string;
 }

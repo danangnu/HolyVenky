@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace API.Entities
 {
     public class tSGGS_Final
     {
+
+        [Key]
         public int ID { get; set; }
         public double line_number { get; set; }
         public string page_No { get; set; }
