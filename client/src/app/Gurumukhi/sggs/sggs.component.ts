@@ -18,6 +18,7 @@ export class SggsComponent implements OnInit {
   tsggs: Tblsggs[];
   findForm: FormGroup;
   isDisabled: boolean;
+  isLastDisabled: boolean;
   selectedIndex: number;
   rowIndex: number;
   userParams: UserParams;
@@ -57,9 +58,9 @@ export class SggsComponent implements OnInit {
     this.loadSggs();
     this.sggsService.getMax().subscribe((response) => {
       if (this.selectedIndex == response) {
-        this.isDisabled = true;
+        this.isLastDisabled = true;
       } else {
-        this.isDisabled = false;
+        this.isLastDisabled = false;
       }
     });
     this.modalForm();
@@ -162,9 +163,9 @@ export class SggsComponent implements OnInit {
         this.router.navigate(['/gurumukhi/' + this.selectedIndex]));
         this.sggsService.getMax().subscribe((response) => {
           if (this.selectedIndex == response) {
-            this.isDisabled = true;
+            this.isLastDisabled = true;
           } else {
-            this.isDisabled = false;
+            this.isLastDisabled = false;
           }
         });
     });

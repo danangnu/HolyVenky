@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
@@ -38,6 +39,12 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return tBibles;
+        }
+
+        [HttpGet]
+        public int GetMaxID()
+        {
+            return _context.tBible.Max(t => t.id);
         }
     }
 }

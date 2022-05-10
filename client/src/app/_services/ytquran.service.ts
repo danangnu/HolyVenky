@@ -8,18 +8,18 @@ import { UserParams } from '../_models/userParams';
 import { ytquran } from '../_models/ytquran';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class YtquranService {
   baseUrl = environment.apiUrl;
   ytquran: ytquran[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   AddNew(model: any) {
-    return this.http.post(this.baseUrl + 'ytquran/addnew', model).pipe(
-      map(this.extractData)
-    )
+    return this.http
+      .post(this.baseUrl + 'quran/addnew', model)
+      .pipe(map(this.extractData));
   }
 
   private extractData(res: any) {
@@ -28,7 +28,10 @@ export class YtquranService {
   }
 
   getQurans(userParams: UserParams) {
-    let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
+    let params = this.getPaginationHeaders(
+      userParams.pageNumber,
+      userParams.pageSize
+    );
     //console.log(userParams.sura);
     if (userParams.sura !== undefined && userParams.sura !== null)
       params = params.append('sura', userParams.sura);
@@ -36,16 +39,18 @@ export class YtquranService {
     if (userParams.verse !== undefined && userParams.verse !== null)
       params = params.append('verse', userParams.verse);
 
-    return this.getPaginatedResult<ytquran[]>(this.baseUrl + 'ytquran', params)
+    return this.getPaginatedResult<ytquran[]>(this.baseUrl + 'ytquran', params);
   }
 
   private getPaginatedResult<T>(url, params) {
     const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
     return this.http.get<T>(url, { observe: 'response', params }).pipe(
-      map(response => {
+      map((response) => {
         paginatedResult.result = response.body;
         if (response.headers.get('Pagination') !== null) {
-          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          paginatedResult.pagination = JSON.parse(
+            response.headers.get('Pagination')
+          );
         }
         return paginatedResult;
       })
@@ -61,7 +66,7 @@ export class YtquranService {
   }
 
   getQuran(id: any) {
-    const ytquran1 = this.ytquran.find(x => x.id === id);
+    const ytquran1 = this.ytquran.find((x) => x.id === id);
     if (ytquran1 !== undefined) return of(ytquran1);
     return this.http.get<ytquran>(this.baseUrl + 'ytquran/' + id);
   }
@@ -72,6 +77,10 @@ export class YtquranService {
         const index = this.ytquran.indexOf(ytquran1);
         this.ytquran[index] = ytquran1;
       })
-    )
+    );
+  }
+
+  getMax(): any {
+    return this.http.get(this.baseUrl + 'quran');
   }
 }

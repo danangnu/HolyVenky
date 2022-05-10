@@ -18,6 +18,7 @@ export class QuranDetailComponent implements OnInit {
   ytqurans: ytquran[];
   findForm: FormGroup;
   isDisabled: boolean;
+  isLastDisabled: boolean;
   selectedIndex: number;
   rowIndex: number;
   userParams: UserParams;
@@ -61,6 +62,13 @@ export class QuranDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadQuran();
+    this.ytquranService.getMax().subscribe((response) => {
+      if (this.selectedIndex == response) {
+        this.isLastDisabled = true;
+      } else {
+        this.isLastDisabled = false;
+      }
+    });
     this.modalForm();
     this.setDefaultValue();
   }
@@ -159,6 +167,13 @@ export class QuranDetailComponent implements OnInit {
       }
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/quran/' + this.selectedIndex]));
+        this.ytquranService.getMax().subscribe((response) => {
+          if (this.selectedIndex == response) {
+            this.isLastDisabled = true;
+          } else {
+            this.isLastDisabled = false;
+          }
+        });
     });
  }
 
