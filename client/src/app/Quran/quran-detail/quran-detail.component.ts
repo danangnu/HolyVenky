@@ -123,10 +123,11 @@ export class QuranDetailComponent implements OnInit {
   }
 
   updateQuran() {
+    //console.log(JSON.stringify(this.ytquran));
     this.ytquranService.updateQuran(this.ytquran, this.route.snapshot.paramMap.get('id')).subscribe(() => {
       this.toastr.success('Data updated successfully');
       this.editForm.reset(this.ytquran);
-      this.router.navigate(['/quran']);
+      this.loadQuran();
     })
   }
 

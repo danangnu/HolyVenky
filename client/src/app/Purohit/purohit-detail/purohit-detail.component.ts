@@ -122,10 +122,11 @@ export class PurohitDetailComponent implements OnInit {
   }
 
   updatePurohit() {
+    //console.log(JSON.stringify(this.tswami_gita_scsv));
     this.tswamigitascsvService.updatePurohit(this.tswami_gita_scsv, this.route.snapshot.paramMap.get('id')).subscribe(() => {
       this.toastr.success('Data updated successfully');
       this.editForm.reset(this.tswami_gita_scsv);
-      this.router.navigate(['/purohit']);
+      this.loadPurohit();
     })
   }
 

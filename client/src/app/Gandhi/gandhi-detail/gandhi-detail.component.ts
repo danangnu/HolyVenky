@@ -106,7 +106,7 @@ export class GandhiDetailComponent implements OnInit {
     this.tgandhisquotesService.updateGandhi(this.tgandhis_quote, this.route.snapshot.paramMap.get('id')).subscribe(() => {
       this.toastr.success('Data updated successfully');
       this.editForm.reset(this.tgandhis_quote);
-      this.router.navigate(['/gandhi']);
+      this.loadGandhi();
     })
   }
 

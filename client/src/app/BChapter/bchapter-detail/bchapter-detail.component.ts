@@ -106,7 +106,7 @@ export class BchapterDetailComponent implements OnInit {
     this.ztbiblechapternamesService.updateBChapter(this.ztbible_chapter_names, this.route.snapshot.paramMap.get('id')).subscribe(() => {
       this.toastr.success('Data updated successfully');
       this.editForm.reset(this.ztbible_chapter_names);
-      this.router.navigate(['/bchapter']);
+      this.loadBChapter();
     })
   }
 

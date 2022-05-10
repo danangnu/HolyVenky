@@ -4,8 +4,7 @@ namespace API.DTOs
 {
     public class ytquranDto
     {
-        [Required]
-        public double ChaperNVerse { get; set; }
+        public double? ChaperNVerse { get; set; }
         public string Verse { get; set; }
         [Required]
         public string Sura { get; set; }

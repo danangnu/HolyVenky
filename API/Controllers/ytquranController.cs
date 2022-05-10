@@ -44,7 +44,8 @@ namespace API.Controllers
         {
             var ytquran = await _iytquranRepository.GetQuranByIdAsync(id);
 
-            ytquran.ChaperNVerse = ytquranDto.ChaperNVerse;
+            if (ytquranDto.ChaperNVerse != null)
+                ytquran.ChaperNVerse = ytquranDto.ChaperNVerse;
             ytquran.Verse = ytquranDto.Verse;
             ytquran.Sura = ytquranDto.Sura;
             ytquran.Location = ytquranDto.Location;

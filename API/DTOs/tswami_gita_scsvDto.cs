@@ -10,7 +10,7 @@ namespace API.DTOs
         [Required]
         public string Chapter { get; set; }
         public string IGS { get; set; }
-        public int NUMBER { get; set; }
+        public double NUMBER { get; set; }
         public string TRANSLITERATION { get; set; }
         public string Gita { get; set; }
         public string Bible_Link { get; set; }

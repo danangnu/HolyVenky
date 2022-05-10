@@ -47,7 +47,8 @@ namespace API.Controllers
             tsggs.BookTitle = sggsDto.BookTitle;
             tsggs.REf = sggsDto.REf;
             tsggs.TextData = sggsDto.TextData;
-            tsggs.Verse_Length = sggsDto.Verse_Length;
+            if (sggsDto.Verse_Length != null)
+                tsggs.Verse_Length = sggsDto.Verse_Length;
             tsggs.Gita = sggsDto.Gita;
             tsggs.Quran = sggsDto.Quran;
             tsggs.Bible = sggsDto.Bible;

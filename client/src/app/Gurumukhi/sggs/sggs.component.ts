@@ -55,7 +55,15 @@ export class SggsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadSggs();
+    this.sggsService.getMax().subscribe((response) => {
+      if (this.selectedIndex == response) {
+        this.isDisabled = true;
+      } else {
+        this.isDisabled = false;
+      }
+    });
     this.modalForm();
+
     this.setDefaultValue();
   }
 
@@ -121,7 +129,7 @@ export class SggsComponent implements OnInit {
       this.toastr.success('Data updated successfully');
       this.editForm.reset(this.sggs);
       this.loadSggs();
-    })
+    });
   }
 
   cancel() {
@@ -152,6 +160,13 @@ export class SggsComponent implements OnInit {
       }
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/gurumukhi/' + this.selectedIndex]));
+        this.sggsService.getMax().subscribe((response) => {
+          if (this.selectedIndex == response) {
+            this.isDisabled = true;
+          } else {
+            this.isDisabled = false;
+          }
+        });
     });
  }
 

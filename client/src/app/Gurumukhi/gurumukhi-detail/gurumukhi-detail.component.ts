@@ -69,7 +69,6 @@ export class GurumukhiDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadGurumukhi();
-    console.log('test');
     this.modalForm();
     this.setDefaultValue();
   }
@@ -140,7 +139,8 @@ export class GurumukhiDetailComponent implements OnInit {
   }
 
   updateGurumukhi() {
-    this.tsggsfinalService
+    console.log(this.tsggs_Final);
+    /*this.tsggsfinalService
       .updateGurumukhi(this.tsggs_Final, this.route.snapshot.paramMap.get('id'))
       .subscribe(() => {
         this.toastr.success('Data updated successfully');
@@ -148,7 +148,7 @@ export class GurumukhiDetailComponent implements OnInit {
         this.router.navigate([
           '/gurumukhi/' + this.route.snapshot.paramMap.get('id'),
         ]);
-      });
+      });*/
   }
 
   cancel() {

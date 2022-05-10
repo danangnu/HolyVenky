@@ -9,7 +9,7 @@ namespace API.DTOs
         public string REf { get; set; }
         [Required]
         public string TextData { get; set; }
-        public int Verse_Length { get; set; }
+        public int? Verse_Length { get; set; }
         public string Gita { get; set; }
         public string Quran { get; set; }
         public string Bible { get; set; }

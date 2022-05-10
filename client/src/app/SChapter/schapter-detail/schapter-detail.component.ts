@@ -123,7 +123,7 @@ export class SchapterDetailComponent implements OnInit {
     this.tsggschapterpagesService.updateSChapter(this.tsggs_chapter_pages, this.route.snapshot.paramMap.get('id')).subscribe(() => {
       this.toastr.success('Data updated successfully');
       this.editForm.reset(this.tsggs_chapter_pages);
-      this.router.navigate(['/schapter']);
+      this.loadSChapter();
     })
   }
 

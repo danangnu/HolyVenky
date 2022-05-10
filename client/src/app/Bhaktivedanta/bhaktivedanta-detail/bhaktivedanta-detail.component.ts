@@ -123,7 +123,7 @@ export class BhaktivedantaDetailComponent implements OnInit {
     this.ztgitafullService.updateBhaktivedanta(this.ztgita_full, this.route.snapshot.paramMap.get('id')).subscribe(() => {
       this.toastr.success('Data updated successfully');
       this.editForm.reset(this.ztgita_full);
-      this.router.navigate(['/bhaktivedanta']);
+      this.loadBhaktivedanta();
     })
   }
 

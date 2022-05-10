@@ -123,7 +123,7 @@ export class ThadithsDetailComponent implements OnInit {
     this.hadithsService.updateMember(this.hadith, this.route.snapshot.paramMap.get('id')).subscribe(() => {
       this.toastr.success('Data updated successfully');
       this.editForm.reset(this.hadith);
-      this.router.navigate(['/thadiths']);
+      this.loadHadith();
     })
   }
 

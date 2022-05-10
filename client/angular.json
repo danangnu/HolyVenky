@@ -87,11 +87,11 @@
           "configurations": {
             "production": {
               "browserTarget": "client:build:production",
-              "port": 4202
+              "port": 4205
             },
             "development": {
               "browserTarget": "client:build:development",
-              "port": 4202
+              "port": 4205
             }
           },
           "defaultConfiguration": "development"
