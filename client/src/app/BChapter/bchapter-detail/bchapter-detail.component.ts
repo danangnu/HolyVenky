@@ -18,6 +18,7 @@ export class BchapterDetailComponent implements OnInit {
   ztbible_chapternames: zTbible_Chapter_Names[];
   findForm: FormGroup;
   isDisabled: boolean;
+  isLastDisabled: boolean;
   selectedIndex: number;
   rowIndex: number;
   userParams: UserParams;
@@ -50,6 +51,13 @@ export class BchapterDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBChapter();
+    this.ztbiblechapternamesService.getMax().subscribe((response) => {
+      if (this.selectedIndex == response) {
+        this.isLastDisabled = true;
+      } else {
+        this.isLastDisabled = false;
+      }
+    });
     this.modalForm();
   }
 
@@ -137,6 +145,13 @@ export class BchapterDetailComponent implements OnInit {
       }
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/bchapter/' + this.selectedIndex]));
+        this.ztbiblechapternamesService.getMax().subscribe((response) => {
+          if (this.selectedIndex == response) {
+            this.isLastDisabled = true;
+          } else {
+            this.isLastDisabled = false;
+          }
+        });
     });
  }
 

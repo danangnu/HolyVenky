@@ -74,4 +74,8 @@ export class HadithsService {
       })
     )
   }
+
+  getMax(): any {
+    return this.http.get(this.baseUrl + 'hadith');
+  }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
@@ -32,6 +33,12 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return Tsggs_chapter___page;
+        }
+
+        [HttpGet]
+        public int GetMaxID()
+        {
+            return _context.Tsggs_chapter___pages.Max(t => t.ID);
         }
     }
 }

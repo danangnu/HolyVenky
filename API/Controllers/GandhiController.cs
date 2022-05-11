@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
@@ -28,6 +29,12 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return TGandhis_quotes;
+        }
+
+        [HttpGet]
+        public int GetMaxID()
+        {
+            return _context.TGandhis_quotes.Max(t => t.ID);
         }
     }
 }

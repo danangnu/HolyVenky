@@ -74,4 +74,8 @@ export class TsggsChapterPagesService {
       })
     )
   }
+
+  getMax(): any {
+    return this.http.get(this.baseUrl + 'schapter');
+  }
 }

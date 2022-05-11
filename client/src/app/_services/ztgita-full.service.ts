@@ -74,4 +74,8 @@ export class ZtgitaFullService {
       })
     )
   }
+
+  getMax(): any {
+    return this.http.get(this.baseUrl + 'bhaktivedanta');
+  }
 }

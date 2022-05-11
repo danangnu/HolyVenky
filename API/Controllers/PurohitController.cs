@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
@@ -39,6 +40,12 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return tswami_gita_scsv1;
+        }
+
+        [HttpGet]
+        public int GetMaxID()
+        {
+            return _context.tswami_gita_scsv.Max(t => t.ID);
         }
     }
 }

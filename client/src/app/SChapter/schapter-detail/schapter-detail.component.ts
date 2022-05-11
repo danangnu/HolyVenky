@@ -18,6 +18,7 @@ export class SchapterDetailComponent implements OnInit {
   tsggs_chapterpages: Tsggs_chapter_pages[];
   findForm: FormGroup;
   isDisabled: boolean;
+  isLastDisabled: boolean;
   selectedIndex: number;
   rowIndex: number;
   userParams: UserParams;
@@ -58,6 +59,13 @@ export class SchapterDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadSChapter();
+    this.tsggschapterpagesService.getMax().subscribe((response) => {
+      if (this.selectedIndex == response) {
+        this.isLastDisabled = true;
+      } else {
+        this.isLastDisabled = false;
+      }
+    });
     this.modalForm();
     this.setDefaultValue();
   }
@@ -150,6 +158,13 @@ export class SchapterDetailComponent implements OnInit {
       }
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/schapter/' + this.selectedIndex]));
+        this.tsggschapterpagesService.getMax().subscribe((response) => {
+          if (this.selectedIndex == response) {
+            this.isLastDisabled = true;
+          } else {
+            this.isLastDisabled = false;
+          }
+        });
     });
  }
 

@@ -18,6 +18,7 @@ export class PurohitDetailComponent implements OnInit {
   tswami_gita_scsvs: tswami_gita_scsv[];
   findForm: FormGroup;
   isDisabled: boolean;
+  isLastDisabled: boolean;
   selectedIndex: number;
   rowIndex: number;
   userParams: UserParams;
@@ -60,6 +61,13 @@ export class PurohitDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPurohit();
+    this.tswamigitascsvService.getMax().subscribe((response) => {
+      if (this.selectedIndex == response) {
+        this.isLastDisabled = true;
+      } else {
+        this.isLastDisabled = false;
+      }
+    });
     this.modalForm();
     this.setDefaultValue();
   }
@@ -158,6 +166,13 @@ export class PurohitDetailComponent implements OnInit {
       }
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/purohit/' + this.selectedIndex]));
+        this.tswamigitascsvService.getMax().subscribe((response) => {
+          if (this.selectedIndex == response) {
+            this.isLastDisabled = true;
+          } else {
+            this.isLastDisabled = false;
+          }
+        });
     });
  }
 

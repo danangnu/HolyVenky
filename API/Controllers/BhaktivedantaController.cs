@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
@@ -32,6 +33,12 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return Ztgita_Full1;
+        }
+
+        [HttpGet]
+        public int GetMaxID()
+        {
+            return _context.Ztgita_Full.Max(t => t.id);
         }
     }
 }

@@ -75,4 +75,8 @@ export class TswamiGitaScsvService {
       })
     )
   }
+
+  getMax(): any {
+    return this.http.get(this.baseUrl + 'purohit');
+  }
 }

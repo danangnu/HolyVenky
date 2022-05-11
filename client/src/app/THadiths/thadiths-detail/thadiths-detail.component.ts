@@ -18,6 +18,7 @@ export class ThadithsDetailComponent implements OnInit {
   hadiths: Hadiths[];
   findForm: FormGroup;
   isDisabled: boolean;
+  isLastDisabled: boolean;
   selectedIndex: number;
   rowIndex: number;
   userParams: UserParams;
@@ -58,6 +59,13 @@ export class ThadithsDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadHadith();
+    this.hadithsService.getMax().subscribe((response) => {
+      if (this.selectedIndex == response) {
+        this.isLastDisabled = true;
+      } else {
+        this.isLastDisabled = false;
+      }
+    });
     this.modalForm();
     this.setDefaultValue();
   }
@@ -155,6 +163,13 @@ export class ThadithsDetailComponent implements OnInit {
       }
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/thadiths/' + this.selectedIndex]));
+        this.hadithsService.getMax().subscribe((response) => {
+          if (this.selectedIndex == response) {
+            this.isLastDisabled = true;
+          } else {
+            this.isLastDisabled = false;
+          }
+        });
     });
  }
 

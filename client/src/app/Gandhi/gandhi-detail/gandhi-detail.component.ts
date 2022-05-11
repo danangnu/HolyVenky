@@ -18,6 +18,7 @@ export class GandhiDetailComponent implements OnInit {
   tgandhis_quotes: TGandhis_quotes[];
   findForm: FormGroup;
   isDisabled: boolean;
+  isLastDisabled: boolean;
   selectedIndex: number;
   rowIndex: number;
   userParams: UserParams;
@@ -50,6 +51,13 @@ export class GandhiDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loadGandhi();
+    this.tgandhisquotesService.getMax().subscribe((response) => {
+      if (this.selectedIndex == response) {
+        this.isLastDisabled = true;
+      } else {
+        this.isLastDisabled = false;
+      }
+    });
     this.modalForm();
   }
 
@@ -137,6 +145,13 @@ export class GandhiDetailComponent implements OnInit {
       }
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/gandhi/' + this.selectedIndex]));
+        this.tgandhisquotesService.getMax().subscribe((response) => {
+          if (this.selectedIndex == response) {
+            this.isLastDisabled = true;
+          } else {
+            this.isLastDisabled = false;
+          }
+        });
     });
  }
 

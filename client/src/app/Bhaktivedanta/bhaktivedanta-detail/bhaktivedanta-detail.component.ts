@@ -18,6 +18,7 @@ export class BhaktivedantaDetailComponent implements OnInit {
   ztgita_fulls: Ztgita_Full[];
   findForm: FormGroup;
   isDisabled: boolean;
+  isLastDisabled: boolean;
   selectedIndex: number;
   rowIndex: number;
   userParams: UserParams;
@@ -58,6 +59,13 @@ export class BhaktivedantaDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBhaktivedanta();
+    this.ztgitafullService.getMax().subscribe((response) => {
+      if (this.selectedIndex == response) {
+        this.isLastDisabled = true;
+      } else {
+        this.isLastDisabled = false;
+      }
+    });
     this.modalForm();
     this.setDefaultValue();
   }
@@ -155,6 +163,13 @@ export class BhaktivedantaDetailComponent implements OnInit {
       }
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/bhaktivedanta/' + this.selectedIndex]));
+        this.ztgitafullService.getMax().subscribe((response) => {
+          if (this.selectedIndex == response) {
+            this.isLastDisabled = true;
+          } else {
+            this.isLastDisabled = false;
+          }
+        });
     });
  }
 

@@ -26,7 +26,8 @@
               [class.previous] = "previous"
               (click)="!isDisabled && previous()" style="right: 400px;position: absolute;"
               routerLink='/purohit/{{selectedIndex}}'>&laquo; Previous</a>
-              <a (click)="next()" [class.next]="next" style="right: 328px;position: absolute;" routerLink='/purohit/{{selectedIndex}}'>Next &raquo;</a>
+              <a [attr.href]="isLastDisabled"
+              (click)="!isLastDisabled && next()" [class.next]="next" style="right: 328px;position: absolute;" routerLink='/purohit/{{selectedIndex}}'>Next &raquo;</a>
               <button [disabled]="!editForm.dirty" class="btn btn-success mr-2" style="right: 132px;position: absolute;" type="submit"> Save</button>
               <button class="btn btn-warning mr-2" (click)="cancel()" style="right: 12px;position: absolute;" type="button"> Cancel</button>
         </div>
