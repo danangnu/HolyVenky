@@ -29,8 +29,16 @@ namespace API.Data
             {
                 if (userParams.BookTitle.Equals("all")) {
                     if (!string.IsNullOrEmpty(userParams.TextData))
-                        query = query.Where(s => s.BookTitle.ToLower().Contains(userParams.TextData.ToLower()) || s.TextData.ToLower().Contains(userParams.TextData.ToLower()) 
+                    {
+                        var a = userParams.TextData.Split(" ");
+                        if (a.Count() > 1)
+                        {
+                            query = query.Where(s => s.BookTitle.ToLower().Contains(userParams.TextData.ToLower()) || s.TextData.ToLower().Contains(userParams.TextData.ToLower()) 
                             || s.Gita.ToLower().Contains(userParams.TextData.ToLower()) || s.Quran.ToLower().Contains(userParams.TextData.ToLower()));
+                        }
+                        
+                    }
+                        
                 } else {
                     if (userParams.BookTitle.Equals("bookTitle")) {
                         if (!string.IsNullOrEmpty(userParams.TextData))
